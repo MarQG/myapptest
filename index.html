@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>JSON Sandbox</title>
+
+</head>
+
+<body>
+
+    <ul id="people"></ul>
+    <script>
+        
+        //This is my comment
+        /*This is a box comment*/
+        /*
+                var person = {
+                    "name": "Ferenc",
+                    age: 29,
+                    address: {
+                        street: "123 home",
+                        city: "Houston"
+                    },
+                    children: ["Josie", "Miko"]
+
+                }
+
+                //person = JSON.stringify(person);
+                //person = JSON.parse(person);
+
+                var people = [{
+
+                    name: "Ferenc",
+                    age: 29
+
+                }, {
+                    name: "Anna",
+                    age: 26
+                }];
+                
+                var output = "";
+
+                for (var i = 0; i < people.length; i++) {
+                    
+                    output += '<li>'+people[i].name+'</li>';
+
+                }
+                
+                document.getElementById('people').innerHTML = output;
+                */
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(xhttp.responseText);
+                var people = response.people;
+
+                var output = '';
+                for (var i = 0; i < people.length; i++) {
+                    output += '<li>' + people[i].name+' '+people[i].age + '</li>';
+                }
+                document.getElementById('people').innerHTML = output;
+            }
+        };
+        xhttp.open("GET", "test.json", true);
+        xhttp.send();
+
+    </script>
+
+
+</body>
+
+</html>
